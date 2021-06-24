@@ -2,6 +2,7 @@ library(tidyverse)
 library(gganimate)
 library(countrycode)
 library(ggflags)
+library(ggdark)
 theme_set(theme_minimal())
 
 events <- c(
@@ -76,7 +77,9 @@ f <- tribble(
   events[11], "Hungary", 2, 4, -3
 )
 
-a <- f %>% 
+# bar graph
+
+p_bars <- f %>% 
   mutate(Frame = factor(Frame, levels = events),
          Code = str_to_lower(countrycode(Team, "country.name", "iso2c"))) %>% 
   ggplot() +
@@ -112,4 +115,51 @@ a <- f %>%
     subtitle = "{closest_state}"
   )
 
-animate(a, nframes = 500, fps = 50, height = 480, width = 600, res = 95, duration = 15, end_pause = 100)
+animate(p_bars, nframes = 500, fps = 50, height = 480, width = 600, res = 95, duration = 15, end_pause = 100)
+
+# line graph
+
+p_lines <- f %>%
+  mutate(
+    Min = case_when(
+      Frame == events[1] ~ "0'",
+      Frame == events[2] ~ "1'",
+      Frame == events[3] ~ "11'",
+      Frame == events[4] ~ "30'",
+      Frame == events[5] ~ "45+2'",
+      Frame == events[6] ~ "47'",
+      Frame == events[7] ~ "60'",
+      Frame == events[8] ~ "66'",
+      Frame == events[9] ~ "68'",
+      Frame == events[10] ~ "84'",
+      Frame == events[11] ~ "90'",
+      TRUE ~ as.character(Frame)
+    ),
+    Code = str_to_lower(countrycode(Team, "country.name", "iso2c"))
+  ) %>% 
+  ggplot(aes(x = Min, y = Rank, group = Team, color = Team)) +
+  geom_line(size = 1) +
+  geom_point(size = 3.5) +
+  geom_text(aes(x = 12, label = Team), hjust = -0.1, alpha = 0.7, size = 6) +
+  geom_text(aes(x = Min, y = 4.5, label = Min), alpha = 0.5,  col = "gray", size = 10) +
+  geom_text(aes(x = 1, y = 0, label = paste0("UEFA Euro 2020 Group F Standings - Matchday 3\n", Frame)), 
+            hjust = 0, col = "#00c1d5", size = 5.5) +
+  geom_segment(aes(xend = max(Min), yend = Rank), linetype = 2, size = 0.7) +
+  geom_flag(aes(x = 11.6, y = Rank, country = Code), size = 8) +
+  dark_theme_minimal() +
+  theme(
+    legend.position = "none",
+    axis.title = element_blank(),
+    axis.text = element_blank(),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+  ) +
+  scale_y_reverse() +
+  scale_color_manual(values = c("#318ce7", "white", "#CD2A3E", "#e42518")) +
+  expand_limits(x = c(1, 14), y = -0.5) +
+  transition_reveal(as.numeric(as.factor(Min))) +
+  enter_fade() +
+  exit_fade() +
+  ease_aes('cubic-in-out') 
+
+animate(p_lines, nframes = 500, height = 500, width = 600, fps = 50, end_pause = 100, rewind = FALSE)
