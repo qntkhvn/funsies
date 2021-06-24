@@ -4,95 +4,81 @@ library(countrycode)
 library(ggflags)
 theme_set(theme_minimal())
 
+events <- c(
+  "POR vs. FRA\nGER vs. HUN\n---\nAfter Matchday 2\n",
+  "POR 0-0 FRA\nGER 0-0 HUN\n---\nKickoff\n",
+  "POR 0-0 FRA\nGER 0-1 HUN\n---\n(HUN) Szalai 11'\n",
+  "POR 1-0 FRA\nGER 0-1 HUN\n---\n(POR) Ronaldo 30' (P)\n",
+  "POR 1-1 FRA\nGER 0-1 HUN\n---\n(FRA) Benzema 45+2' (P)\n",
+  "POR 1-2 FRA\nGER 0-1 HUN\n---\n(FRA) Benzema 47'\n",
+  "POR 2-2 FRA\nGER 0-1 HUN\n---\n(POR) Ronaldo 60' (P)\n",
+  "POR 2-2 FRA\nGER 1-1 HUN\n---\n(GER) Havertz 66'\n",
+  "POR 2-2 FRA\nGER 1-2 HUN\n---\n(HUN) Schafer 68'\n",
+  "POR 2-2 FRA\nGER 2-2 HUN\n---\n(GER) Goretzka 84'\n",
+  "POR 2-2 FRA\nGER 2-2 HUN\n---\nFull-time. End of Group Stage\n"
+)
+
 f <- tribble(
   ~Frame, ~Team, ~Points, ~Rank, ~GD,
-  "f0", "France", 4, 1, 1,
-  "f0", "Germany", 3, 2, 1,
-  "f0", "Portugal", 3, 3, 1,
-  "f0", "Hungary", 1, 4, -3,
+  events[1], "France", 4, 1, 1,
+  events[1], "Germany", 3, 2, 1,
+  events[1], "Portugal", 3, 3, 1,
+  events[1], "Hungary", 1, 4, -3,
   
-  "f1", "France", 5, 1, 1,
-  "f1", "Germany", 4, 2, 1,
-  "f1", "Portugal", 4, 3, 1,
-  "f1", "Hungary", 2, 4, -3,
+  events[2], "France", 5, 1, 1,
+  events[2], "Germany", 4, 2, 1,
+  events[2], "Portugal", 4, 3, 1,
+  events[2], "Hungary", 2, 4, -3,
   
-  "f2", "France", 5, 1, 1,
-  "f2", "Germany", 3, 4, 0,
-  "f2", "Portugal", 4, 2, 1,
-  "f2", "Hungary", 4, 3, -2,
+  events[3], "France", 5, 1, 1,
+  events[3], "Germany", 3, 4, 0,
+  events[3], "Portugal", 4, 2, 1,
+  events[3], "Hungary", 4, 3, -2,
   
-  "f3", "France", 4, 2, 0,
-  "f3", "Germany", 3, 4, 0,
-  "f3", "Portugal", 6, 1, 2,
-  "f3", "Hungary", 4, 3, -2,
+  events[4], "France", 4, 2, 0,
+  events[4], "Germany", 3, 4, 0,
+  events[4], "Portugal", 6, 1, 2,
+  events[4], "Hungary", 4, 3, -2,
   
-  "f4", "France", 5, 1, 1,
-  "f4", "Germany", 3, 4, 0,
-  "f4", "Portugal", 4, 2, 1,
-  "f4", "Hungary", 4, 3, -2,
+  events[5], "France", 5, 1, 1,
+  events[5], "Germany", 3, 4, 0,
+  events[5], "Portugal", 4, 2, 1,
+  events[5], "Hungary", 4, 3, -2,
   
-  "f5", "France", 7, 1, 2,
-  "f5", "Germany", 3, 3, 0,
-  "f5", "Portugal", 3, 4, 0,
-  "f5", "Hungary", 4, 2, -2,
+  events[6], "France", 7, 1, 2,
+  events[6], "Germany", 3, 3, 0,
+  events[6], "Portugal", 3, 4, 0,
+  events[6], "Hungary", 4, 2, -2,
   
-  "f6", "France", 5, 1, 1,
-  "f6", "Germany", 3, 4, 0,
-  "f6", "Portugal", 4, 2, 1,
-  "f6", "Hungary", 4, 3, -2,
+  events[7], "France", 5, 1, 1,
+  events[7], "Germany", 3, 4, 0,
+  events[7], "Portugal", 4, 2, 1,
+  events[7], "Hungary", 4, 3, -2,
   
-  "f7", "France", 5, 1, 1,
-  "f7", "Germany", 4, 2, 1,
-  "f7", "Portugal", 4, 3, 1,
-  "f7", "Hungary", 2, 4, -3,
+  events[8], "France", 5, 1, 1,
+  events[8], "Germany", 4, 2, 1,
+  events[8], "Portugal", 4, 3, 1,
+  events[8], "Hungary", 2, 4, -3,
   
-  "f8", "France", 5, 1, 1,
-  "f8", "Germany", 3, 4, 0,
-  "f8", "Portugal", 4, 2, 1,
-  "f8", "Hungary", 4, 3, -2,
+  events[9], "France", 5, 1, 1,
+  events[9], "Germany", 3, 4, 0,
+  events[9], "Portugal", 4, 2, 1,
+  events[9], "Hungary", 4, 3, -2,
   
-  "f9", "France", 5, 1, 1,
-  "f9", "Germany", 4, 2, 1,
-  "f9", "Portugal", 4, 3, 1,
-  "f9", "Hungary", 2, 4, -3,
+  events[10], "France", 5, 1, 1,
+  events[10], "Germany", 4, 2, 1,
+  events[10], "Portugal", 4, 3, 1,
+  events[10], "Hungary", 2, 4, -3,
   
-  "f10", "France", 5, 1, 1,
-  "f10", "Germany", 4, 2, 1,
-  "f10", "Portugal", 4, 3, 1,
-  "f10", "Hungary", 2, 4, -3
+  events[11], "France", 5, 1, 1,
+  events[11], "Germany", 4, 2, 1,
+  events[11], "Portugal", 4, 3, 1,
+  events[11], "Hungary", 2, 4, -3
 )
 
 a <- f %>% 
-  mutate(
-    Frame = case_when(
-      Frame == "f0" ~ "POR vs. FRA\nGER vs. HUN\n---\nAfter Matchday 2\n",
-      Frame == "f1" ~ "POR 0-0 FRA\nGER 0-0 HUN\n---\nKickoff\n",
-      Frame == "f2" ~ "POR 0-0 FRA\nGER 0-1 HUN\n---\n(HUN) Szalai 11'\n",
-      Frame == "f3" ~ "POR 1-0 FRA\nGER 0-1 HUN\n---\n(POR) Ronaldo 30' (P)\n",
-      Frame == "f4" ~ "POR 1-1 FRA\nGER 0-1 HUN\n---\n(FRA) Benzema 45+2' (P)\n",
-      Frame == "f5" ~ "POR 1-2 FRA\nGER 0-1 HUN\n---\n(FRA) Benzema 47'\n",
-      Frame == "f6" ~ "POR 2-2 FRA\nGER 0-1 HUN\n---\n(POR) Ronaldo 60' (P)\n",
-      Frame == "f7" ~ "POR 2-2 FRA\nGER 1-1 HUN\n---\n(GER) Havertz 66'\n",
-      Frame == "f8" ~ "POR 2-2 FRA\nGER 1-2 HUN\n---\n(HUN) Schafer 68'\n",
-      Frame == "f9" ~ "POR 2-2 FRA\nGER 2-2 HUN\n---\n(GER) Goretzka 84'\n",
-      Frame == "f10" ~ "POR 2-2 FRA\nGER 2-2 HUN\n---\nFull-time. End of Group Stage\n",
-      TRUE ~ as.character(Frame)
-    ),
-    Frame = factor(Frame, levels = c(
-      "POR vs. FRA\nGER vs. HUN\n---\nAfter Matchday 2\n",
-      "POR 0-0 FRA\nGER 0-0 HUN\n---\nKickoff\n",
-      "POR 0-0 FRA\nGER 0-1 HUN\n---\n(HUN) Szalai 11'\n",
-      "POR 1-0 FRA\nGER 0-1 HUN\n---\n(POR) Ronaldo 30' (P)\n",
-      "POR 1-1 FRA\nGER 0-1 HUN\n---\n(FRA) Benzema 45+2' (P)\n",
-      "POR 1-2 FRA\nGER 0-1 HUN\n---\n(FRA) Benzema 47'\n",
-      "POR 2-2 FRA\nGER 0-1 HUN\n---\n(POR) Ronaldo 60' (P)\n",
-      "POR 2-2 FRA\nGER 1-1 HUN\n---\n(GER) Havertz 66'\n",
-      "POR 2-2 FRA\nGER 1-2 HUN\n---\n(HUN) Schafer 68'\n",
-      "POR 2-2 FRA\nGER 2-2 HUN\n---\n(GER) Goretzka 84'\n",
-      "POR 2-2 FRA\nGER 2-2 HUN\n---\nFull-time. End of Group Stage\n"
-    )),
-    Code = str_to_lower(countrycode(Team, "country.name", "iso2c"))
-  ) %>% 
+  mutate(Frame = factor(Frame, levels = events),
+         Code = str_to_lower(countrycode(Team, "country.name", "iso2c"))) %>% 
   ggplot() +
   geom_col(aes(x = Rank, y = Points, group = Team, fill = Team), 
            show.legend = FALSE, width = 0.5) +
@@ -127,6 +113,3 @@ a <- f %>%
   )
 
 animate(a, nframes = 500, fps = 50, height = 480, width = 600, res = 95, duration = 15, end_pause = 100)
-
-
-  
