@@ -87,14 +87,16 @@ slam <- player("Roger_Federer") %>%
 ```{r}
 anim <- slam %>% 
   filter(Result == "W") %>% 
+  mutate(Player = fct_rev(Player)) %>% 
   ggplot(aes(x = Count, y = Player, fill = Player)) + 
   geom_col(width = 0.5, show.legend = FALSE) +
   scale_fill_manual(values = c("#08457e", "#aa151b", "red")) + 
   geom_text(aes(label = as.character(Count)), hjust = -0.3) + 
+  ggtitle("Grand Slam Titles\n{closest_state}") +
   transition_states(Slam) +
-  ggtitle("{closest_state}")
+  ease_aes("quadratic-in-out")
 
-animate(anim, nframes = 270)
+animate(anim, nframes = 2160, fps = 50, height = 480, width = 600, res = 90, duration = 12)
 ```
 
 ### Grand Slam Performance (Main Draw)
