@@ -1,7 +1,8 @@
+library(tidyverse)
 library(gganimate)
 theme_set(theme_minimal())
 
-euro_groups <- read_csv("~/Desktop/R/animations/euro_groups.csv")
+euro_groups <- read_csv("https://raw.githubusercontent.com/qntkhvn/funsies/main/animations/euro2020/euro_groups.csv")
 
 colors <- c("#ED2939", "#eb192b", "gray22", "#ed1b2c",
             "#e32219","#00007e", "#002F6C", "#052789",
@@ -15,7 +16,7 @@ a <- euro_groups %>%
   geom_col(aes(x = Rank, y = Points, group = Team, fill = Team), 
            show.legend = FALSE) +
   geom_text(aes(x = Rank, y = 0, label = paste(Team, " ", sep = " "),
-            group = Team), 
+                group = Team), 
             hjust = 1, size = 3, vjust = 0.35) +
   geom_text(aes(x = Rank, y = Points, label = as.character(Points)), 
             hjust = -0.3, size = 3) +
