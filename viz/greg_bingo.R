@@ -30,7 +30,8 @@ greg <- c("It depends",
           "It's sorta like",
           "Is that what\nthe kids say?",
           "Somebody look it up",
-          "Am I boring you?")
+          "Am I boring you?",
+          "Mentions tenure")
 
 set.seed(1)
 tibble(what = sample(greg, 25),
