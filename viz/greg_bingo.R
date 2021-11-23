@@ -34,7 +34,7 @@ greg <- c("It depends",
 
 set.seed(1)
 tibble(what = sample(greg, 25),
-       row = rep(1:5,5),
+       row = rep(1:5, 5),
        col = rep(1:5, each = 5)) %>% 
   mutate(what = ifelse(row == 3 & col == 3, 
                        "Free space\nHas 10+ tabs opened", what)) %>% 
