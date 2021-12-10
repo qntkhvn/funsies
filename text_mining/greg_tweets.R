@@ -1,3 +1,4 @@
+
 library(tidyverse)
 library(rtweet)
 library(tidytext)
@@ -5,7 +6,7 @@ library(wordcloud)
 library(reshape2)
 theme_set(theme_light())
 
-greg_tweets <- get_timeline(user = "statsinthewild", n = 1000)
+greg_tweets <- get_timeline(user = "statsinthewild", n = 5000)
 
 words <- greg_tweets %>%
   select(text) %>%
@@ -23,7 +24,7 @@ words %>%
   coord_flip() +
   labs(x = "Count",
        y = "Unique words",
-       title = "Unique words found in @statsinthewild's last 1000 tweets/replies")
+       title = "Unique words found in @statsinthewild's last 5000 tweets/replies")
 
 words %>%
   inner_join(get_sentiments("bing")) %>%
