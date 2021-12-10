@@ -54,7 +54,12 @@ words <- c(
   "wpi",
   "413",
   "wrestling",
-  "nuts"
+  "nuts",
+  "baller",
+  "bonker",
+  "lunch",
+  "meeting",
+  "pick up",
 )
 
 
