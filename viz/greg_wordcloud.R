@@ -1,5 +1,3 @@
-
-
 words <- c(
   "deets",
   "kids",
@@ -60,14 +58,16 @@ words <- c(
   "lunch",
   "meeting",
   "pick up",
+  "enough"
 )
 
 
-set.seed(66666666666)
+set.seed(1)
 freq <- ceiling(100 * runif(length(words)))
 
 
 library(wordcloud)
+
 
 wordcloud(
   words = words,
@@ -75,5 +75,4 @@ wordcloud(
   max.words = length(freq),
   random.order = FALSE,
   colors = sample(colors(), length(words)),
-  min.freq = 1
-)
+  min.freq = 1)
