@@ -1,0 +1,54 @@
+---
+title: |
+  | Title
+author:
+  - author 1\footnote{university 1}
+  - author 2\footnote{university 2}
+  - author 3\footnotemark[1]
+output:
+  pdf_document: 
+    number_sections: true
+    keep_tex: true
+    citation_package: natbib
+date: \today
+# documentclass: amsart
+fontsize: 12pt
+geometry: margin=1in
+linestretch: 1
+# fontfamily: mathptmx
+indent: true
+link-citations: true
+linkcolor: cyan
+urlcolor: cyan
+citecolor: cyan
+biblio-style: apalike
+bibliography: references.bib
+abstract: |
+  | Insert abstract here
+  |
+  | *Keywords:* key1; key2; key3
+---
+
+\newpage
+
+# Intro
+
+Motivation, background, literature review
+
+Textual citation: @R2023
+
+Parenthetical citation: @R2023
+
+# Methods
+
+Describe the method
+
+# Results
+
+Summarize the results
+
+# Discussion
+
+Concluding remarks
+
+# References
