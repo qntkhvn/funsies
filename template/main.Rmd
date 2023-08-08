@@ -37,7 +37,7 @@ Motivation, background, literature review
 
 Textual citation: @R2023
 
-Parenthetical citation: @R2023
+Parenthetical citation: [@R2023]
 
 # Methods
 
