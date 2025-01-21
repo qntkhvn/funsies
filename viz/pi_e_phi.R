@@ -18,7 +18,6 @@ pi_digit |>
   geom_tile() +
   scale_fill_manual(values = MetBrewer::met.brewer("Hiroshige", n = 10, type = "continuous")) +
   scale_y_reverse() + 
-  guides(fill = guide_legend(nrow = 1, title = NULL)) + 
   coord_fixed() +
   theme_void() +
   theme(legend.position = "none")
@@ -43,7 +42,26 @@ e_digit |>
   geom_tile() +
   scale_fill_manual(values = MetBrewer::met.brewer("Hiroshige", n = 10, type = "continuous")) +
   scale_y_reverse() + 
-  guides(fill = guide_legend(nrow = 1, title = NULL))+ 
+  coord_equal() +
+  theme_void() +
+  theme(legend.position = "none")
+
+# phi ---------------------------------------------------------------------
+
+phi <- read_lines("https://www.goldennumber.net/wp-content/uploads/2012/06/Phi-To-100000-Places.txt")
+phi <- str_remove(phi[5], "\\.")
+
+phi_digit <- tibble(digit = str_sub(phi, 1, 100000)) |> 
+  mutate(digit = str_split(digit, "")) |> 
+  unnest_longer(digit) |> 
+  mutate(row_index = rep(1:400, each = 250),
+         col_index = rep(1:250, 400))
+
+phi_digit |>
+  ggplot(aes(row_index, col_index, fill = factor(digit))) +
+  geom_tile() +
+  scale_fill_manual(values = MetBrewer::met.brewer("Hiroshige", n = 10, type = "continuous")) +
+  scale_y_reverse() +
   coord_equal() +
   theme_void() +
   theme(legend.position = "none")
